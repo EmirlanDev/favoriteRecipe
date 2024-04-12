@@ -1,0 +1,121 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  list-style: none;
+}
+
+.container {
+  max-width: 1240px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+img {
+  object-fit: cover;
+}
+
+input {
+  outline: none;
+}
+
+.categories {
+  display: grid;
+  grid-template-columns: repeat(4, 250px);
+  justify-content: space-between;
+  row-gap: 60px;
+  flex-wrap: wrap;
+  padding: 50px 0;
+}
+
+@media (max-width: 1080px) {
+  .categories {
+    grid-template-columns: repeat(3, 250px);
+  }
+}
+
+@media (max-width: 810px) {
+  .categories {
+    grid-template-columns: repeat(2, 250px);
+    justify-content: space-around;
+  }
+}
+
+@media (max-width: 600px) {
+  .categories {
+    grid-template-columns: repeat(1, 250px);
+    justify-content: center;
+  }
+}
+
+.popular {
+  display: grid;
+  grid-template-columns: repeat(3, 380px);
+  justify-content: space-between;
+  row-gap: 30px;
+  padding: 50px 0 100px;
+}
+
+@media (max-width: 1240px) {
+  .popular {
+    grid-template-columns: repeat(2, 380px);
+    justify-content: space-around;
+  }
+}
+
+@media (max-width: 880px) {
+  .popular {
+    grid-template-columns: repeat(1, 380px);
+    justify-content: center;
+  }
+}
+
+@media (max-width: 470px) {
+  .popular {
+    grid-template-columns: repeat(1, 320px);
+    justify-content: center;
+  }
+}
+
+#img {
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+#images {
+  &::-webkit-scrollbar {
+    background-color: transparent;
+    height: 5px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: gray;
+    border-radius: 4px;
+  }
+}
+
+#profile {
+  position: relative;
+  &:hover {
+    #userName {
+      display: flex;
+      justify-content: center;
+    }
+  }
+}
+
+#userName {
+  display: none;
+  position: absolute;
+  transform: translateX(-50%);
+  left: 50%;
+  width: 150px;
+  font-size: 12px;
+  background-color: rgba(14, 14, 14, 0.381);
+  color: rgba(255, 255, 255, 0.67);
+  border-radius: 3px;
+  border: 1px solid #000;
+  text-align: center;
+  margin-top: 5px;
+}

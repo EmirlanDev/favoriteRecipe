@@ -1,0 +1,204 @@
+// import React from "react";
+// import bg from "../assets/HeroImg.png";
+// import { useNavigate } from "react-router-dom";
+
+// export const LogIn = () => {
+//   const navigate = useNavigate();
+
+//   return (
+//     <section className="absolute bg-white w-[100%] z-[100]">
+//       <img
+//         className="absolute right-0 z-[-1] h-[100vh] max-[680px]:hidden"
+//         src={bg}
+//         alt=""
+//       />
+//       <img
+//         className="absolute left-0 z-[-1] h-[100vh] rotate-180 max-[1250px]:hidden"
+//         src={bg}
+//         alt=""
+//       />
+//       <div className="container">
+//         <div className="flex flex-col items-center justify-center h-[100vh] gap-3">
+//           <input
+//             className="border-[1px] border-[#FF9A31] rounded-[8px] px-[20px] py-[4px] text-[17px] max-w-[300px] w-[100%]"
+//             type="text"
+//             placeholder="Email"
+//           />
+//           <div className="max-w-[300px] w-[100%]">
+//             <input
+//               className="border-[1px] border-[#FF9A31] rounded-[8px] px-[20px] py-[4px] text-[17px] w-[100%]"
+//               type="text"
+//               placeholder="Пароль"
+//             />
+//           </div>
+//           <button className="max-w-[200px] w-[100%] bg-[#FF9A31] py-[4px] text-[#5f3517] rounded-[8px] text-[18px] font-semibold">
+//             Войти
+//           </button>
+//           <h6 className="mt-[8px] ml-[5px] w-[300px] text-center">
+//             Вы впервые в нашем сайте?{" "}
+//             <span
+//               onClick={() => navigate("/sign_up")}
+//               className="text-[#FF9A31] cursor-pointer"
+//             >
+//               Зарегистрироваться
+//             </span>
+//           </h6>
+//         </div>
+//       </div>
+//     </section>
+//   );
+// };
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import bg from "../assets/HeroImg.png";
+import { useAuth } from "./../context/AuthContext";
+import errorImage from "../assets/error.svg";
+import { useSelector } from "react-redux";
+
+export const LogIn = () => {
+  const navigate = useNavigate();
+  const [values, setValues] = useState({
+    email: "",
+    password: "",
+  });
+  const [error, setError] = useState("");
+  const [valid, setValid] = useState({
+    email: true,
+    password: true,
+  });
+  const { logIn, registWithGoogle } = useAuth();
+  const { user } = useSelector((s) => s);
+
+  function handleInputValue(e) {
+    setValues({ ...values, [e.target.name]: e.target.value });
+  }
+
+  function checkValid() {
+    !values.email
+      ? setValid({ ...valid, email: (valid.email = false) })
+      : setValid({ ...valid, email: (valid.email = true) });
+    !values.password
+      ? setValid({ ...valid, password: (valid.password = false) })
+      : setValid({ ...valid, password: (valid.password = true) });
+  }
+
+  let findFirstInd = error.indexOf("/") + 1;
+  let findLastInd = error.lastIndexOf(")");
+  let messageError = error.slice(findFirstInd, findLastInd);
+
+  async function handleSignUp() {
+    try {
+      if (values.email && values.password) {
+        await logIn(values);
+        setValues({
+          email: "",
+          password: "",
+        });
+      }
+    } catch (error) {
+      setError(error.message);
+      setTimeout(() => {
+        setError("");
+      }, 4000);
+    }
+    checkValid();
+    return;
+  }
+
+  useEffect(() => {
+    if (user) {
+      navigate("/");
+    }
+  }, [user]);
+
+  return (
+    <section className="absolute bg-white w-[100%] z-[100]">
+      <img
+        className="absolute right-0 z-[-1] h-[100vh] max-[680px]:hidden"
+        src={bg}
+        alt=""
+      />
+      <img
+        className="absolute left-0 z-[-1] h-[100vh] rotate-180 max-[1250px]:hidden"
+        src={bg}
+        alt=""
+      />
+      <div className="container">
+        <div className="flex flex-col items-center justify-center h-[100vh]">
+          <input
+            style={{
+              border: values.email || valid.email ? "" : "2px solid red",
+            }}
+            onChange={handleInputValue}
+            className={`border-[1px] mt-3 border-[#FF9A31] rounded-[8px] px-[20px] py-[4px] text-[17px] max-w-[300px] w-[100%] ${
+              values.email || valid.email ? "" : "placeholder:text-red-500"
+            }`}
+            type="text"
+            placeholder={
+              values.email || valid.email ? "Email" : "Заполните Email!"
+            }
+            value={values.email}
+            name="email"
+          />
+          <div className="max-w-[300px] mt-3 w-[100%]">
+            <input
+              style={{
+                border:
+                  values.password || valid.password ? "" : "2px solid red",
+              }}
+              onChange={handleInputValue}
+              className={`border-[1px] border-[#FF9A31] rounded-[8px] px-[20px] py-[4px] text-[17px] w-[100%] ${
+                values.password || valid.password
+                  ? ""
+                  : "placeholder:text-red-500"
+              }`}
+              type="text"
+              placeholder={
+                values.password || valid.password
+                  ? "Пароль"
+                  : "Заполните пароль!"
+              }
+              value={values.password}
+              name="password"
+            />
+          </div>
+          <p
+            style={{
+              display: error ? "" : "none",
+            }}
+            className="flex items-center border-[2px] border-[red] gap-2 bg-[#ff000096] mt-[10px] py-1 px-5 text-[#fff] rounded-lg"
+          >
+            <img className="w-[20px]" src={errorImage} alt="" />
+            {messageError}
+          </p>
+          <button
+            onClick={handleSignUp}
+            className="max-w-[200px] w-[100%] mt-3 bg-[#ffc78c] border-[1px] border-[#FF9A31] py-[4px] text-[#5f3517] rounded-[8px] text-[18px] font-semibold hover:bg-[#FF9A31] transition-all"
+          >
+            Войти
+          </button>
+          <button
+            onClick={() => registWithGoogle()}
+            className="flex items-center gap-2 max-w-[280px] justify-center w-[100%] mt-3 bg-[#ffc78c] border-[1px] border-[#FF9A31] py-[4px] text-[#5f3517] rounded-[8px] text-[18px] font-semibold hover:bg-[#FF9A31] transition-all"
+          >
+            <img
+              className="w-[20px]"
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_%22G%22_logo.svg/768px-Google_%22G%22_logo.svg.png"
+              alt="button"
+            />
+            регистрация через Google
+          </button>
+          <h6 className="mt-[8px] ml-[5px]">
+            Вы впервые в нашем сайте?{" "}
+            <span
+              onClick={() => navigate("/sign_up")}
+              className="text-[#FF9A31] cursor-pointer"
+            >
+              Зарегистрироваться
+            </span>
+          </h6>
+        </div>
+      </div>
+    </section>
+  );
+};
