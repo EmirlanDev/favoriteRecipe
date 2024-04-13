@@ -24,7 +24,7 @@ export const Categories = () => {
   const navigate = useNavigate();
 
   return (
-    <section className="pt-[100px]">
+    <section data-aos="fade-right" className="pt-[100px]">
       <div className="container">
         <h1 className="text-6xl mb-6 max-[600px]:text-5xl">Категории</h1>
         <div className="categories">

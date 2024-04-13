@@ -29,7 +29,10 @@ export const Saved = () => {
           <section>
             <div className="container">
               <div className="flex items-center justify-center h-[85vh] flex-col gap-2">
-                <h1 data-aos="fade-down" className="text-[32px] font-semibold">
+                <h1
+                  data-aos="fade-down"
+                  className="text-[32px] font-semibold text-center"
+                >
                   Нету сохранненых рецептов
                 </h1>
                 <p data-aos="zoom-in" className="max-w-[500px] text-center">

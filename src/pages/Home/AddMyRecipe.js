@@ -9,11 +9,15 @@ export const AddMyRecipe = () => {
       <div className="container">
         <div className="flex justify-around items-center gap-[20px] max-[720px]:flex-col">
           <img
+            data-aos="fade-right"
             className="w-[30%] max-[1024px]:w-[40%] max-[720px]:w-[60%] max-[620px]:w-[80%]"
             src={addRecipe}
             alt=""
           />
-          <div className="flex flex-col text-end items-end max-[720px]:items-center">
+          <div
+            data-aos="fade-left"
+            className="flex flex-col text-end items-end max-[720px]:items-center"
+          >
             <h1 className="text-[60px] flex flex-col text-end leading-tight max-[1024px]:text-5xl max-[1024px]:font-semibold max-[720px]:text-center max-[620px]:text-4xl">
               Поделись Своим <span className="text-[#FF9A31]">Рецептом</span>
             </h1>

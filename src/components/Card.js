@@ -5,11 +5,13 @@ import saveWhite from "../assets/saveWhite.svg";
 import { MdDelete } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { addToSave } from "./../redux/Reducer/ActionCreater";
+import { useRecipeContext } from "./../context/RecipeContext";
 
 export const Card = ({ el, id, detailId }) => {
   const navigate = useNavigate();
   const { user, save } = useSelector((s) => s);
   const dispatch = useDispatch();
+  const { delRecipe } = useRecipeContext();
 
   return (
     <div
@@ -60,6 +62,7 @@ export const Card = ({ el, id, detailId }) => {
           {el ? el.title : ""}
         </h2>
         <MdDelete
+          onClick={() => delRecipe(el.id)}
           style={{
             display: user && user.displayName === el.user.name ? "" : "none",
           }}

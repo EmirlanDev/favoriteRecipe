@@ -22,6 +22,11 @@ export const RecipeContext = ({ children }) => {
     dispatch({ type: actionType.GET_RECIPE, payload: data });
   }
 
+  async function delRecipe(id) {
+    await axios.delete(`${API}/${id}`);
+    getRecipes();
+  }
+
   async function addLike(id) {
     let { data } = await axios(`${API}/${id}`);
     let check = data.like.some((email) => email === user.email);
@@ -41,6 +46,7 @@ export const RecipeContext = ({ children }) => {
   const values = {
     createNewRecipe,
     getRecipes,
+    delRecipe,
     addLike,
   };
   return (
