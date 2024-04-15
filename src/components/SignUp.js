@@ -264,7 +264,7 @@ export const SignUp = () => {
             />
             регистрация через Google
           </button>
-          <h6 className="mt-[8px] ml-[5px]">
+          <h6 className="mt-[8px] ml-[5px] text-center">
             у тебя есть аккаунт?{" "}
             <span
               onClick={() => navigate("/log_in")}
