@@ -1,18 +1,17 @@
 import React, { useEffect, useState } from "react";
 import addImg from "../../assets/addImg.svg";
 import del from "../../assets/delete.svg";
-import axios from "axios";
 
 export const Images = ({ setValues, values }) => {
   const [collection, setCollection] = useState([]);
   const [imgIdx, setImgIdx] = useState(0);
 
-  const handleImageChange = (e) => {
+  async function handleImageChange(e) {
     const files = Array.from(e.target.files);
     const urls = files.map((file) => URL.createObjectURL(file));
     setCollection((prevImageUrls) => [...prevImageUrls, ...urls]);
     setImgIdx(imgIdx < 0 ? 0 : imgIdx);
-  };
+  }
 
   const deleteImage = (idx) => {
     setCollection(collection.filter((el, ind) => ind !== idx));

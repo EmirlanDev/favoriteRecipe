@@ -64,7 +64,7 @@ export const DetailPage = () => {
                     <img
                       style={{
                         height: imgIdx === idx ? "166px" : "",
-                        width: imgIdx === idx ? "148px" : "",
+                        width: imgIdx === idx ? "148px" : "146px",
                         border: imgIdx === idx ? "2px solid #FF9A31" : "",
                         boxShadow:
                           imgIdx === idx ? "0px 0px 17px 2px #00000087" : "",
@@ -127,7 +127,7 @@ export const DetailPage = () => {
               </div>
             </div>
             <div>
-              <div className="bg-[#D9D9D98F] rounded-[10px] pt-[30px] pb-[60px] px-[30px]">
+              <div className="bg-[#D9D9D98F] rounded-[10px] pt-[30px] pb-[60px] px-[30px] mb-5">
                 <h2 className="text-[26px] text-center text-[#FF9A31] mb-[25px] max-[1025px]:leading-7">
                   Информация о питательности продукта
                 </h2>

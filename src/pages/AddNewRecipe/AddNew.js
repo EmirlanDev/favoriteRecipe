@@ -5,9 +5,14 @@ import { Nutrition } from "./Nutrition";
 import { Instructions } from "./Instructions";
 import { useRecipeContext } from "./../../context/RecipeContext";
 import { useSelector } from "react-redux";
+import { ImagesByURL } from "./ImagesByURL";
+import { useNavigate } from "react-router-dom";
 
 export const AddNew = () => {
   const { user } = useSelector((s) => s);
+  const navigate = useNavigate();
+  const [error, setError] = useState("");
+
   const [values, setValues] = useState({
     user: {
       name: user ? user.displayName : "",
@@ -55,41 +60,55 @@ export const AddNew = () => {
 
   function handleCreate() {
     try {
-      createNewRecipe(values);
-      setValues({
-        user: {
-          name: "",
-          image: "",
-        },
-        title: "",
-        image: [],
-        nutrition: {
-          calories: "",
-          carbohydrate: "",
-          protein: "",
-          sodium: "",
-          cleanCarbohydrate: "",
-          grease: "",
-        },
-        desciption: "",
-        ingredients: [],
-        instructions: [],
-        serving: 0,
-        cookingTime: {
-          hour: 0,
-          minut: 0,
-        },
-        preparationTime: {
-          hour: 0,
-          minut: 0,
-        },
-        category: "",
-        like: [],
-      });
+      if (
+        values.title &&
+        values.image &&
+        values.ingredients &&
+        values.instructions &&
+        values.category
+      ) {
+        createNewRecipe(values);
+        setValues({
+          user: {
+            name: "",
+            image: "",
+          },
+          title: "",
+          image: [],
+          nutrition: {
+            calories: "",
+            carbohydrate: "",
+            protein: "",
+            sodium: "",
+            cleanCarbohydrate: "",
+            grease: "",
+          },
+          desciption: "",
+          ingredients: [],
+          instructions: [],
+          serving: 0,
+          cookingTime: {
+            hour: 0,
+            minut: 0,
+          },
+          preparationTime: {
+            hour: 0,
+            minut: 0,
+          },
+          category: "",
+          like: [],
+        });
+        navigate("/");
+      } else {
+        setError("Заполните поля!!!");
+        return;
+      }
     } catch (error) {
-      console.log(error.message + "create");
+      setError("Заполните поля!!!");
     }
   }
+
+  console.log(values);
 
   return (
     <section className="pt-[100px] max-[720px]:pt-[80px]">
@@ -109,7 +128,7 @@ export const AddNew = () => {
               placeholder="Добавить название"
               value={values.title}
             />
-            <Images setValues={setValues} values={values} />
+            <ImagesByURL setValues={setValues} values={values} />
             <Nutrition setValues={setValues} values={values} />
             <h2 className="text-[30px] text-[#FF9A31] font-semibold max-[540px]:text-[28px] mt-[50px] mb-[20px]">
               Описание:
@@ -120,7 +139,7 @@ export const AddNew = () => {
               }
               className="border-[2px] border-[#757575] rounded-[8px] text-[22px] py-[8px] px-[20px] w-[100%] gap-[8px] max-h-[200px]"
               type="text"
-              placeholder="Продставь свой рецепт"
+              placeholder="Пре  дставь свой рецепт"
               value={values.desciption}
             ></textarea>
             <Ingredients setValues={setValues} values={values} />
@@ -238,7 +257,8 @@ export const AddNew = () => {
                 </option>
               ))}
             </select>
-            <div className="py-[60px] flex = justify-end">
+            <div className="py-[60px] flex justify-end flex-col items-end">
+              <p className="mb-4 text-red-600 text-[20px]">{error}</p>
               <button
                 onClick={handleCreate}
                 className="py-[10px] px-[54px] text-[25px] bg-[#714424] rounded-xl text-cente text-white"
