@@ -99,6 +99,7 @@ export const AddNew = () => {
           like: [],
         });
         navigate("/");
+        window.scroll(0, 0);
       } else {
         setError("Заполните поля!!!");
         return;
