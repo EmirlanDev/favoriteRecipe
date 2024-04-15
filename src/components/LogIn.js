@@ -1,59 +1,11 @@
-// import React from "react";
-// import bg from "../assets/HeroImg.png";
-// import { useNavigate } from "react-router-dom";
-
-// export const LogIn = () => {
-//   const navigate = useNavigate();
-
-//   return (
-//     <section className="absolute bg-white w-[100%] z-[100]">
-//       <img
-//         className="absolute right-0 z-[-1] h-[100vh] max-[680px]:hidden"
-//         src={bg}
-//         alt=""
-//       />
-//       <img
-//         className="absolute left-0 z-[-1] h-[100vh] rotate-180 max-[1250px]:hidden"
-//         src={bg}
-//         alt=""
-//       />
-//       <div className="container">
-//         <div className="flex flex-col items-center justify-center h-[100vh] gap-3">
-//           <input
-//             className="border-[1px] border-[#FF9A31] rounded-[8px] px-[20px] py-[4px] text-[17px] max-w-[300px] w-[100%]"
-//             type="text"
-//             placeholder="Email"
-//           />
-//           <div className="max-w-[300px] w-[100%]">
-//             <input
-//               className="border-[1px] border-[#FF9A31] rounded-[8px] px-[20px] py-[4px] text-[17px] w-[100%]"
-//               type="text"
-//               placeholder="Пароль"
-//             />
-//           </div>
-//           <button className="max-w-[200px] w-[100%] bg-[#FF9A31] py-[4px] text-[#5f3517] rounded-[8px] text-[18px] font-semibold">
-//             Войти
-//           </button>
-//           <h6 className="mt-[8px] ml-[5px] w-[300px] text-center">
-//             Вы впервые в нашем сайте?{" "}
-//             <span
-//               onClick={() => navigate("/sign_up")}
-//               className="text-[#FF9A31] cursor-pointer"
-//             >
-//               Зарегистрироваться
-//             </span>
-//           </h6>
-//         </div>
-//       </div>
-//     </section>
-//   );
-// };
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import bg from "../assets/HeroImg.png";
 import { useAuth } from "./../context/AuthContext";
 import errorImage from "../assets/error.svg";
 import { useSelector } from "react-redux";
+import { IoEyeOutline } from "react-icons/io5";
+import { IoEyeOffOutline } from "react-icons/io5";
 
 export const LogIn = () => {
   const navigate = useNavigate();
@@ -111,6 +63,8 @@ export const LogIn = () => {
     }
   }, [user]);
 
+  const [eyeOne, setEyeOne] = useState(false);
+
   return (
     <section className="absolute bg-white w-[100%] z-[100]">
       <img
@@ -140,7 +94,7 @@ export const LogIn = () => {
             value={values.email}
             name="email"
           />
-          <div className="max-w-[300px] mt-3 w-[100%]">
+          <div className="relative max-w-[300px] mt-3 w-[100%]">
             <input
               style={{
                 border:
@@ -152,7 +106,7 @@ export const LogIn = () => {
                   ? ""
                   : "placeholder:text-red-500"
               }`}
-              type="text"
+              type={eyeOne ? "text" : "password"}
               placeholder={
                 values.password || valid.password
                   ? "Пароль"
@@ -161,6 +115,17 @@ export const LogIn = () => {
               value={values.password}
               name="password"
             />
+            {eyeOne ? (
+              <IoEyeOffOutline
+                onClick={() => setEyeOne(false)}
+                className="absolute top-[9px] right-4 cursor-pointer text-[18px]"
+              />
+            ) : (
+              <IoEyeOutline
+                onClick={() => setEyeOne(true)}
+                className="absolute top-[9px] right-4 cursor-pointer text-[18px]"
+              />
+            )}
           </div>
           <p
             style={{

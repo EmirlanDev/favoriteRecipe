@@ -4,6 +4,8 @@ import bg from "../assets/HeroImg.png";
 import { useAuth } from "./../context/AuthContext";
 import errorImage from "../assets/error.svg";
 import { useSelector } from "react-redux";
+import { IoEyeOutline } from "react-icons/io5";
+import { IoEyeOffOutline } from "react-icons/io5";
 
 export const SignUp = () => {
   const navigate = useNavigate();
@@ -89,6 +91,9 @@ export const SignUp = () => {
     }
   }, [user]);
 
+  const [eyeOne, setEyeOne] = useState(false);
+  const [eyeTwo, setEyeTwo] = useState(false);
+
   return (
     <section className="absolute bg-white w-[100%] z-[100]">
       <img
@@ -171,7 +176,7 @@ export const SignUp = () => {
             value={values.email}
             name="email"
           />
-          <div className="max-w-[300px] mt-3 w-[100%]">
+          <div className="relative max-w-[300px] mt-3 w-[100%]">
             <input
               style={{
                 border:
@@ -183,15 +188,27 @@ export const SignUp = () => {
                   ? ""
                   : "placeholder:text-red-500"
               }`}
-              type="text"
+              type={eyeOne ? "text" : "password"}
               placeholder={
                 values.password || valid.password ? "Пароль" : "Заполните поле!"
               }
               value={values.password}
               name="password"
             />
+            {eyeOne ? (
+              <IoEyeOffOutline
+                onClick={() => setEyeOne(false)}
+                className="absolute top-[9px] right-4 cursor-pointer text-[18px]"
+              />
+            ) : (
+              <IoEyeOutline
+                onClick={() => setEyeOne(true)}
+                className="absolute top-[9px] right-4 cursor-pointer text-[18px]"
+              />
+            )}
           </div>
-          <div className="max-w-[300px] mt-3 w-[100%]">
+
+          <div className="relative max-w-[300px] mt-3 w-[100%]">
             <input
               style={{
                 border: values.repeat || valid.repeat ? "" : "2px solid red",
@@ -200,7 +217,7 @@ export const SignUp = () => {
               className={`border-[1px] border-[#FF9A31] rounded-[8px] px-[20px] py-[4px] text-[17px] w-[100%] ${
                 values.repeat || valid.repeat ? "" : "placeholder:text-red-500"
               }`}
-              type="text"
+              type={eyeTwo ? "text" : "password"}
               placeholder={
                 values.repeat || valid.repeat
                   ? "Повторить пароль"
@@ -209,6 +226,17 @@ export const SignUp = () => {
               value={values.repeat}
               name="repeat"
             />
+            {eyeTwo ? (
+              <IoEyeOffOutline
+                onClick={() => setEyeTwo(false)}
+                className="absolute top-[9px] right-4 cursor-pointer text-[18px]"
+              />
+            ) : (
+              <IoEyeOutline
+                onClick={() => setEyeTwo(true)}
+                className="absolute top-[9px] right-4 cursor-pointer text-[18px]"
+              />
+            )}
             <p
               style={{
                 display: error ? "" : "none",
