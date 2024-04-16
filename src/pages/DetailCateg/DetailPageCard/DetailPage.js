@@ -43,8 +43,6 @@ export const DetailPage = () => {
     localStorage.setItem("isDone", JSON.stringify(isDone));
   }, [isDone]);
 
-  console.log(isDone);
-
   useEffect(() => {
     foundOneRecipe();
     similarRecipeForCategory();
@@ -123,36 +121,35 @@ export const DetailPage = () => {
                 </h2>
                 {oneRecipe.ingredients.map((ingredient, idx) => (
                   <div
+                    key={idx}
                     onClick={() => isDoneIngredient(idx)}
                     className="flex items-center gap-2"
                   >
                     <span
                       style={{
-                        background:
-                          isDone.some((el) => el.idx === idx) &&
-                          isDone.some((el) => el.id === oneRecipe.id)
-                            ? "#FF9A31"
-                            : "",
-                        borderColor:
-                          isDone.some((el) => el.idx === idx) &&
-                          isDone.some((el) => el.id === oneRecipe.id)
-                            ? "#FF9A31"
-                            : "",
+                        background: isDone.some(
+                          (el) => el.idx === idx && el.id === oneRecipe.id
+                        )
+                          ? "#FF9A31"
+                          : "",
+                        borderColor: isDone.some(
+                          (el) => el.idx === idx && el.id === oneRecipe.id
+                        )
+                          ? "#FF9A31"
+                          : "",
                       }}
                       className="w-[18px] h-[18px] border-[2px] rounded-sm"
                     >
                       <FaCheck className="text-[14px] text-white" />
                     </span>
-                    {isDone.some((el) => el.idx === idx) &&
-                    isDone.some((el) => el.id === oneRecipe.id) ? (
+                    {isDone.some(
+                      (el) => el.idx === idx && el.id === oneRecipe.id
+                    ) ? (
                       <s className="text-[22px] max-[540px]:text-[18px] text-[gray]">
                         {ingredient}
                       </s>
                     ) : (
-                      <p
-                        key={idx}
-                        className="text-[22px] max-[540px]:text-[18px]"
-                      >
+                      <p className="text-[22px] max-[540px]:text-[18px]">
                         {ingredient}
                       </p>
                     )}
