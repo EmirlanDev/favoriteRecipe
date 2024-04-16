@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Images } from "./Images";
 import { Ingredients } from "./Ingredients";
 import { Nutrition } from "./Nutrition";
@@ -109,14 +109,27 @@ export const AddNew = () => {
     }
   }
 
-  console.log(values);
+  useEffect(() => {
+    if (!JSON.parse(localStorage.getItem("open"))) {
+      navigate("/");
+    }
+  }, [JSON.parse(localStorage.getItem("open"))]);
 
   return (
     <section className="pt-[100px] max-[720px]:pt-[80px]">
       <div className="container">
         <div>
-          <h1 className="text-[32px] py-[30px] border-b-[2px]">
-            Создать рецепт
+          <h1 className="text-[32px] py-[30px] border-b-[2px] flex justify-between items-center">
+            Создать рецепт{" "}
+            <span
+              onClick={() => {
+                localStorage.removeItem("open");
+                navigate("/");
+              }}
+              className="text-[14px] py-[3px] px-[8px] bg-[#9b1414] text-white rounded-md cursor-pointer"
+            >
+              Закрыть доступ
+            </span>
           </h1>
           <div className="mx-[auto] max-w-[590px] w-[100%]">
             <h2 className="text-[30px] text-[#FF9A31] font-semibold max-[540px]:text-[28px] mt-[50px] mb-[20px]">
@@ -140,7 +153,7 @@ export const AddNew = () => {
               }
               className="border-[2px] border-[#757575] rounded-[8px] text-[22px] py-[8px] px-[20px] w-[100%] gap-[8px] max-h-[200px]"
               type="text"
-              placeholder="Пре  дставь свой рецепт"
+              placeholder="Представь свой рецепт"
               value={values.desciption}
             ></textarea>
             <Ingredients setValues={setValues} values={values} />
