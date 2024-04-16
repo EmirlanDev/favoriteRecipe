@@ -13,7 +13,9 @@ export const Card = ({ el, id, detailId }) => {
   const dispatch = useDispatch();
   const { delRecipe } = useRecipeContext();
 
-  let titled = el ? el.title.split(" ").slice(0, 6).join(" ") : "";
+  const titled = el ? el.title.split(" ").slice(0, 6).join(" ") : "";
+
+  const titleLength = el ? el.title.split(" ").length : 0;
 
   return (
     <div
@@ -62,6 +64,13 @@ export const Card = ({ el, id, detailId }) => {
           }`}
         >
           {titled}
+          <span
+            style={{
+              display: titleLength > 6 ? "" : "none",
+            }}
+          >
+            ...
+          </span>
         </h2>
         <MdDelete
           onClick={() => delRecipe(el.id)}

@@ -4,6 +4,7 @@ import { Card } from "./../../../components/Card";
 import { OhterRecipes } from "./OhterRecipes";
 import { useSelector } from "react-redux";
 import { useRecipeContext } from "./../../../context/RecipeContext";
+import { FaCheck } from "react-icons/fa6";
 
 export const DetailPage = () => {
   const { id, detailId } = useParams();
@@ -11,9 +12,10 @@ export const DetailPage = () => {
   const [similar, setSimirlar] = useState([]);
   const { recipes } = useSelector((s) => s);
   const { getRecipes } = useRecipeContext();
-  useEffect(() => {
-    getRecipes();
-  }, []);
+  const [isDone, setIsDone] = useState(
+    JSON.parse(localStorage.getItem("isDone")) || []
+  );
+  const [imgIdx, setImgIdx] = useState(0);
 
   function foundOneRecipe() {
     let oneRecipe = recipes.find((el) => el.id === detailId);
@@ -29,12 +31,28 @@ export const DetailPage = () => {
     setSimirlar(similar);
   }
 
+  function isDoneIngredient(idx) {
+    if (isDone.some((num) => num.idx === idx)) {
+      setIsDone(isDone.filter((el) => el.idx !== idx));
+    } else {
+      setIsDone([...isDone, { idx, id: oneRecipe.id }]);
+    }
+  }
+
+  useEffect(() => {
+    localStorage.setItem("isDone", JSON.stringify(isDone));
+  }, [isDone]);
+
+  console.log(isDone);
+
   useEffect(() => {
     foundOneRecipe();
     similarRecipeForCategory();
   }, [recipes]);
 
-  const [imgIdx, setImgIdx] = useState(0);
+  useEffect(() => {
+    getRecipes();
+  }, []);
 
   return (
     <section className="pt-[100px]">
@@ -104,9 +122,41 @@ export const DetailPage = () => {
                   Ингредиенты:
                 </h2>
                 {oneRecipe.ingredients.map((ingredient, idx) => (
-                  <p key={idx} className="text-[22px] max-[540px]:text-[18px]">
-                    {ingredient}
-                  </p>
+                  <div
+                    onClick={() => isDoneIngredient(idx)}
+                    className="flex items-center gap-2"
+                  >
+                    <span
+                      style={{
+                        background:
+                          isDone.some((el) => el.idx === idx) &&
+                          isDone.some((el) => el.id === oneRecipe.id)
+                            ? "#FF9A31"
+                            : "",
+                        borderColor:
+                          isDone.some((el) => el.idx === idx) &&
+                          isDone.some((el) => el.id === oneRecipe.id)
+                            ? "#FF9A31"
+                            : "",
+                      }}
+                      className="w-[18px] h-[18px] border-[2px] rounded-sm"
+                    >
+                      <FaCheck className="text-[14px] text-white" />
+                    </span>
+                    {isDone.some((el) => el.idx === idx) &&
+                    isDone.some((el) => el.id === oneRecipe.id) ? (
+                      <s className="text-[22px] max-[540px]:text-[18px] text-[gray]">
+                        {ingredient}
+                      </s>
+                    ) : (
+                      <p
+                        key={idx}
+                        className="text-[22px] max-[540px]:text-[18px]"
+                      >
+                        {ingredient}
+                      </p>
+                    )}
+                  </div>
                 ))}
               </div>
               <div className="flex flex-col gap-4 pb-[80px] max-[890px]:pb-[20px]">
