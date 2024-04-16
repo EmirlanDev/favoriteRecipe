@@ -13,6 +13,8 @@ export const Card = ({ el, id, detailId }) => {
   const dispatch = useDispatch();
   const { delRecipe } = useRecipeContext();
 
+  let titled = el ? el.title.split(" ").slice(0, 6).join(" ") : "";
+
   return (
     <div
       className={`${detailId > 0 ? "h-[300px]" : "h-[370px]"} ${
@@ -59,7 +61,7 @@ export const Card = ({ el, id, detailId }) => {
             detailId > 0 ? "text-[18px]" : "text-[22px]"
           }`}
         >
-          {el ? el.title : ""}
+          {titled}
         </h2>
         <MdDelete
           onClick={() => delRecipe(el.id)}
