@@ -79,37 +79,6 @@ export const Card = ({ el, id, detailId }) => {
           }}
           className="absolute right-8 top-5 text-[30px] text-[red]"
         />
-        <div className="absolute bottom-0 pb-[20px] w-[85%] flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            {el && el.user.image ? (
-              <img
-                className="w-[35px] h-[35px] rounded-[50%]"
-                src={el.user.image}
-                alt="avatar"
-              />
-            ) : (
-              <img
-                className="w-[35px] h-[35px] rounded-[50%]"
-                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_we7r5CWAZRO7KN7WjBPMnjp4hDlLIrVGYad4FRuh2g&s"
-                alt="avatar"
-              />
-            )}
-            <h3 className={`${detailId > 0 ? "text-[16px]" : "text-[19px]"}`}>
-              {el ? el.user.name : ""}
-            </h3>
-          </div>
-          {/* {true ? (
-            <FaHeart
-              // onClick={() => addLike(el.id)}
-              className="text-[26px] w-[27px] text-[red]"
-            />
-          ) : (
-            <FaRegHeart
-              // onClick={() => addLike(el.id)}
-              className="text-[26px] w-[27px]"
-            />
-          )} */}
-        </div>
       </div>
     </div>
   );
