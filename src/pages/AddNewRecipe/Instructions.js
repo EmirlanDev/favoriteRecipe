@@ -14,6 +14,12 @@ export const Instructions = ({ setValues, values }) => {
     return;
   }
 
+  function onKeyEnterAdd(e) {
+    if (e.key === "Enter") {
+      handleAdd();
+    }
+  }
+
   function del(idx) {
     if (window.confirm("Удалить")) {
       setValues({
@@ -57,6 +63,7 @@ export const Instructions = ({ setValues, values }) => {
             type="text"
             placeholder="Добавить инструкцию"
             value={value}
+            onKeyDown={onKeyEnterAdd}
           />
 
           <span

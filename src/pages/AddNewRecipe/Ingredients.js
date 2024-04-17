@@ -13,6 +13,12 @@ export const Ingredients = ({ setValues, values }) => {
     return;
   }
 
+  function onKeyEnterAdd(e) {
+    if (e.key === "Enter") {
+      handleAdd();
+    }
+  }
+
   function del(idx) {
     if (window.confirm("Удалить")) {
       setValues({
@@ -56,6 +62,7 @@ export const Ingredients = ({ setValues, values }) => {
             type="text"
             placeholder="Довабить ингредиент"
             value={value}
+            onKeyDown={onKeyEnterAdd}
           />
 
           <span

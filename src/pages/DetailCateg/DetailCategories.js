@@ -52,6 +52,12 @@ export const DetailCategories = () => {
     }
   }
 
+  function onKeyEnter(e) {
+    if (e.key === "Enter") {
+      getSearchRes();
+    }
+  }
+
   useEffect(() => {
     setSearchRes([]);
   }, [search]);
@@ -66,6 +72,7 @@ export const DetailCategories = () => {
           <div className="flex justify-center py-[30px] gap-[10px]">
             <input
               onChange={(e) => setSearch(e.target.value)}
+              onKeyDown={onKeyEnter}
               className="border-[2px] border-[#714424] py-[5px] px-[20px] rounded-[8px] w-[60%] text-[18px] max-[780px]:w-[80%]"
               type="text"
               placeholder="Поиск..."

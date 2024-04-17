@@ -18,6 +18,12 @@ export const ImagesByURL = ({ setValues, values }) => {
     }
   }
 
+  function onKeyEnterAddImage(e) {
+    if (e.key === "Enter") {
+      addCollection();
+    }
+  }
+
   useEffect(() => {
     setTimeout(() => {
       if (error) {
@@ -31,8 +37,10 @@ export const ImagesByURL = ({ setValues, values }) => {
   }, [collec]);
 
   const deleteImage = (idx) => {
-    setCollec(collec.filter((el, ind) => ind !== idx));
-    setImgIdx(imgIdx > 0 ? idx - 1 : idx);
+    if (window.confirm("Удалить")) {
+      setCollec(collec.filter((el, ind) => ind !== idx));
+      setImgIdx(imgIdx > 0 ? idx - 1 : idx);
+    }
   };
 
   return (
@@ -91,6 +99,7 @@ export const ImagesByURL = ({ setValues, values }) => {
           placeholder="фото URL..."
           onChange={(e) => setImage(e.target.value)}
           value={image}
+          onKeyDown={onKeyEnterAddImage}
         />
         <button
           onClick={addCollection}

@@ -24,6 +24,12 @@ export const AddMyRecipe = () => {
     }
   }
 
+  function onKeyEnterConfirmation(e) {
+    if (e.key === "Enter") {
+      saveConfirmation();
+    }
+  }
+
   function navAdd() {
     if (JSON.parse(localStorage.getItem("open"))) {
       navigate("/add_new_recipe");
@@ -74,9 +80,14 @@ export const AddMyRecipe = () => {
         style={{
           display: modal ? "" : "none",
         }}
+        onKeyDown={(e) => {
+          if (e.key === "Escape") {
+            setModal(false);
+          }
+        }}
         className="fixed top-0 w-[100%] h-[100vh] bg-[#0000008b] z-[200] backdrop-blur-sm flex items-center justify-center"
       >
-        <div className="bg-white py-[10px] px-[20px] rounded-lg">
+        <div className="bg-white p-[20px] rounded-lg">
           <h1 className="text-center text-[20px]">
             Пишите 6 значный <br />
             <span className="text-[#dd8741] font-bold">код потверждения</span>
@@ -88,6 +99,8 @@ export const AddMyRecipe = () => {
             className="border-[2px] rounded-lg px-[10px] py-1 mt-5 w-[100%]"
             type="text"
             value={confirmation.slice(0, 6)}
+            placeholder="Введите код..."
+            onKeyDown={onKeyEnterConfirmation}
             style={{
               borderColor: error ? "red" : "",
             }}
@@ -101,7 +114,7 @@ export const AddMyRecipe = () => {
               закрыть
             </button>
             <button
-              onClick={() => saveConfirmation()}
+              onClick={saveConfirmation}
               className="py-[2px] px-[5px] bg-[#4f9af6] text-white rounded-md"
             >
               потвердить
