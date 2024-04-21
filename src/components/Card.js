@@ -75,9 +75,13 @@ export const Card = ({ el, id, detailId }) => {
         <MdDelete
           onClick={() => delRecipe(el.id)}
           style={{
-            display: user && user.displayName === el.user.name ? "" : "none",
+            display:
+              (user && user.displayName === el.user.name) ||
+              (user && user.email === "admin@gmail.com")
+                ? ""
+                : "none",
           }}
-          className="absolute right-8 top-5 text-[30px] text-[red]"
+          className="absolute right-8 bottom-5 text-[30px] text-[red]"
         />
       </div>
     </div>

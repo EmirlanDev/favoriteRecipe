@@ -21,7 +21,7 @@ export const Search = () => {
               ))
             ) : (
               <div className="load">
-                <div class="loader"></div>
+                <h3 className="text-[30px]">Нету по вашему запросу</h3>
               </div>
             )}
           </div>

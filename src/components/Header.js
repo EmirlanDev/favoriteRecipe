@@ -65,6 +65,14 @@ export const Header = () => {
     }
   }, [search]);
 
+  useEffect(() => {
+    if (scrolled) {
+      setSearchBtn(false);
+    } else {
+      setSearchBtn(true);
+    }
+  }, [scrolled]);
+
   return (
     <>
       <div
@@ -162,7 +170,10 @@ export const Header = () => {
                 </div>
                 <button
                   onClick={() => setSearchBtn(!searchBtn)}
-                  className="text-[25px] w-[32px] h-[32px] bg-[#714424] rounded-[10px] text-[#fff] flex justify-center items-center"
+                  style={{
+                    color: scrolled ? "black" : "",
+                  }}
+                  className="transition-all text-[30px] w-[32px] h-[32px] rounded-[10px] text-[#b6b6b6] flex justify-center items-center"
                 >
                   <IoSearch />
                 </button>

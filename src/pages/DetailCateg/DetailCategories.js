@@ -35,6 +35,10 @@ export const DetailCategories = () => {
       setCategor("Рецепты смузи");
     } else if (id == "pasta") {
       setCategor("Рецепты пасты");
+    } else if (id == "drink") {
+      setCategor("Напитки");
+    } else if (id == "kids") {
+      setCategor("Детские");
     }
   }, []);
 
