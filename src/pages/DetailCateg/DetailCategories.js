@@ -44,32 +44,32 @@ export const DetailCategories = () => {
 
   const categorCards = recipes.filter((el) => el.category === categor);
 
-  function getSearchRes() {
-    if (search) {
-      setSearchRes(
-        categorCards.filter((recipe) => recipe.title.includes(search))
-      );
-    }
-  }
+  // function getSearchRes() {
+  //   if (search) {
+  //     setSearchRes(
+  //       categorCards.filter((recipe) => recipe.title.includes(search))
+  //     );
+  //   }
+  // }
 
-  function onKeyEnter(e) {
-    if (e.key === "Enter") {
-      getSearchRes();
-    }
-  }
+  // function onKeyEnter(e) {
+  //   if (e.key === "Enter") {
+  //     getSearchRes();
+  //   }
+  // }
 
-  useEffect(() => {
-    setSearchRes([]);
-  }, [search]);
+  // useEffect(() => {
+  //   setSearchRes([]);
+  // }, [search]);
 
-  let categorOfsearch =
-    search && searchRes.length > 0 ? searchRes : categorCards;
+  // let categorOfsearch =
+  //   search && searchRes.length > 0 ? searchRes : categorCards;
 
   return (
     <section className="pt-[100px] max-[720px]:pt-[80px]">
       <div className="container">
         <div>
-          <div className="flex justify-center py-[30px] gap-[10px]">
+          {/* <div className="flex justify-center py-[30px] gap-[10px]">
             <input
               onChange={(e) => setSearch(e.target.value)}
               onKeyDown={onKeyEnter}
@@ -83,18 +83,20 @@ export const DetailCategories = () => {
             >
               <IoSearch className="text-[22px] text-[#fff]" />
             </button>
-          </div>
-          <h1 className="text-4xl mb-6">{categor}</h1>
+          </div> */}
+          <h1 className="text-4xl my-6">{categor}</h1>
         </div>
         <div className="popular">
           {categorCards.length > 0 ? (
-            categorOfsearch.map((el, idx) => (
+            categorCards.map((el, idx) => (
               <div key={idx}>
                 <Card el={el} id={id} />
               </div>
             ))
           ) : (
-            <h1>...Loading</h1>
+            <div className="load">
+              <div class="loader"></div>
+            </div>
           )}
         </div>
       </div>

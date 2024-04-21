@@ -46,14 +46,16 @@ export const AddNew = () => {
   });
 
   const categories = [
-    { title: "Рецепты завтраков", id: "breakfast" },
-    { title: "Рецепты обеда", id: "lunch" },
-    { title: "Рецепты ужина", id: "dinner" },
-    { title: "Рецепты закусок", id: "snack" },
-    { title: "Рецепты салатов", id: "salat" },
-    { title: "Рецепты пиццы", id: "pizza" },
-    { title: "Рецепты смузи", id: "smoothy" },
-    { title: "Рецепты пасты", id: "pasta" },
+    { title: "Завтрак", id: "breakfast" },
+    { title: "Обед", id: "lunch" },
+    { title: "Ужин", id: "dinner" },
+    { title: "Закуски", id: "snack" },
+    { title: "Салаты", id: "salat" },
+    { title: "Пиццы", id: "pizza" },
+    { title: "Смузи", id: "smoothy" },
+    { title: "Пасты", id: "pasta" },
+    { title: "Напитки", id: "drink" },
+    { title: "Детские", id: "kids" },
   ];
 
   const { createNewRecipe } = useRecipeContext();

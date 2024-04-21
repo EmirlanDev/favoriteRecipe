@@ -22,11 +22,17 @@ input {
 
 .categories {
   display: grid;
-  grid-template-columns: repeat(4, 250px);
+  grid-template-columns: repeat(5, 220px);
   justify-content: space-between;
   row-gap: 60px;
   flex-wrap: wrap;
   padding: 50px 0;
+}
+
+@media (max-width: 1160px) {
+  .categories {
+    grid-template-columns: repeat(4, 250px);
+  }
 }
 
 @media (max-width: 1080px) {
@@ -118,4 +124,59 @@ input {
   border: 1px solid #000;
   text-align: center;
   margin-top: 5px;
+}
+
+// #search {
+//   input {
+//     width: 0;
+//     padding: 0;
+//     border: none;
+//     transition: 0.5s;
+//   }
+//   &:hover {
+//     input {
+//       width: 180px;
+//       padding: 0 10px;
+//       border: 1px solid #714424;
+//     }
+//   }
+// }
+
+.load {
+  width: 100vw;
+  height: 50vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loader {
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-left-color: transparent;
+  border-radius: 50%;
+}
+
+.loader {
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-left-color: transparent;
+  width: 36px;
+  height: 36px;
+}
+
+.loader {
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-left-color: transparent;
+  width: 36px;
+  height: 36px;
+  animation: spin89345 1s linear infinite;
+}
+
+@keyframes spin89345 {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
 }

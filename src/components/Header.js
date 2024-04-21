@@ -2,16 +2,19 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import logo from "../assets/logo.svg";
 import saveWhite from "../assets/saveWhite.svg";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { signOut } from "firebase/auth";
 import { auth } from "./../firebase";
+import { IoSearch } from "react-icons/io5";
+import { actionType } from "./../redux/actionType";
 
 export const Header = () => {
   const [scrolled, setScrolled] = useState(false);
   const [burger, setBurger] = useState(false);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const navigate = useNavigate();
-  const { user, save } = useSelector((s) => s);
+  const { user, save, search } = useSelector((s) => s);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -44,13 +47,23 @@ export const Header = () => {
     } else if (windowWidth <= 800 && windowWidth > 700) {
       window.scroll(0, 3100);
     } else if (windowWidth <= 700 && windowWidth > 600) {
-      window.scroll(0, 3650);
+      window.scroll(0, 3350);
     } else if (windowWidth <= 600) {
-      window.scroll(0, 4730);
+      window.scroll(0, 5230);
     } else {
       window.scroll(0, 2700);
     }
   }
+
+  const [searchBtn, setSearchBtn] = useState(false);
+
+  useEffect(() => {
+    if (search) {
+      navigate("/search");
+    } else {
+      navigate("/");
+    }
+  }, [search]);
 
   return (
     <>
@@ -121,6 +134,39 @@ export const Header = () => {
               </li>
             </nav>
             <div className="flex gap-4 items-center">
+              <div id="search" className="flex gap-2">
+                <div className="absolute top-[100px] left-[50%] max-w-[500px] w-[85%] translate-x-[-50%] flex">
+                  <input
+                    style={{
+                      height: searchBtn ? "" : "0",
+                      border: searchBtn ? "" : "0",
+                    }}
+                    onChange={(e) =>
+                      dispatch({
+                        type: actionType.SEARCH,
+                        payload: e.target.value,
+                      })
+                    }
+                    type="text"
+                    className=" transition-all w-[100%] rounded-lg h-[30px] border-[1px] border-[#714424] px-[10px]"
+                    placeholder="Поиск рецепта"
+                  />
+                  <button
+                    style={{
+                      display: searchBtn ? "" : "none",
+                    }}
+                    className="ml-[-30px]"
+                  >
+                    <IoSearch />
+                  </button>
+                </div>
+                <button
+                  onClick={() => setSearchBtn(!searchBtn)}
+                  className="text-[25px] w-[32px] h-[32px] bg-[#714424] rounded-[10px] text-[#fff] flex justify-center items-center"
+                >
+                  <IoSearch />
+                </button>
+              </div>
               {user ? (
                 <div className="flex items-center gap-8 sticky">
                   <div

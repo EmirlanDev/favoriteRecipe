@@ -4,6 +4,7 @@ const INIT_STATE = {
   recipes: [],
   user: null,
   save: JSON.parse(localStorage.getItem("save")) || [],
+  search: "",
 };
 
 export const MainReducer = (state = INIT_STATE, action) => {
@@ -12,6 +13,8 @@ export const MainReducer = (state = INIT_STATE, action) => {
       return { ...state, recipes: action.payload };
     case actionType.GET_USER:
       return { ...state, user: action.payload };
+    case actionType.SEARCH:
+      return { ...state, search: action.payload };
     case actionType.ADD_SAVE:
       const fount = state.save.find((el) => el.id === action.payload.id);
       if (fount) {

@@ -21,11 +21,17 @@ export const Popular = () => {
       <div className="container">
         <h1 className="text-6xl mb-6 max-[600px]:text-5xl">Популярные</h1>
         <div className="popular">
-          {popular.map((el, idx) => (
-            <div key={idx}>
-              <Card el={el} />
+          {popular.length > 0 ? (
+            popular.map((el, idx) => (
+              <div key={idx}>
+                <Card el={el} />
+              </div>
+            ))
+          ) : (
+            <div className="load">
+              <div class="loader"></div>
             </div>
-          ))}
+          )}
         </div>
       </div>
     </section>

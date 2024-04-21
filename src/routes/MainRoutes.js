@@ -7,6 +7,7 @@ import { DetailCategories } from "../pages/DetailCateg/DetailCategories";
 import { Saved } from "./../pages/Saved/Saved";
 import { DetailPage } from "./../pages/DetailCateg/DetailPageCard/DetailPage";
 import { AddNew } from "./../pages/AddNewRecipe/AddNew";
+import { Search } from "./../components/Search";
 
 export const MainRoutes = () => {
   const PUBLIC = [
@@ -19,6 +20,7 @@ export const MainRoutes = () => {
     { path: "saved/popular/:detailId", element: <DetailPage /> },
     { path: "/saved", element: <Saved /> },
     { path: "/add_new_recipe", element: <AddNew /> },
+    { path: "/search", element: <Search /> },
   ];
 
   return (

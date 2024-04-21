@@ -11,14 +11,24 @@ import { useNavigate } from "react-router-dom";
 
 export const Categories = () => {
   const categories = [
-    { img: breakfast, title: "Рецепты завтраков", id: "breakfast" },
-    { img: lunch, title: "Рецепты обеда", id: "lunch" },
-    { img: dinner, title: "Рецепты ужина", id: "dinner" },
-    { img: snack, title: "Рецепты закусок", id: "snack" },
-    { img: salat, title: "Рецепты салатов", id: "salat" },
-    { img: pizza, title: "Рецепты пиццы", id: "pizza" },
-    { img: smoothy, title: "Рецепты смузи", id: "smoothy" },
-    { img: pasta, title: "Рецепты пасты", id: "pasta" },
+    { img: breakfast, title: "Завтраки", id: "breakfast" },
+    { img: lunch, title: "Обеды", id: "lunch" },
+    { img: dinner, title: "Ужины", id: "dinner" },
+    { img: snack, title: "Закуски", id: "snack" },
+    { img: salat, title: "Салаты", id: "salat" },
+    { img: pizza, title: "Пиццы", id: "pizza" },
+    { img: smoothy, title: "Смузи", id: "smoothy" },
+    { img: pasta, title: "Пасты", id: "pasta" },
+    {
+      img: "https://img1.russianfood.com/dycontent/images_upl/266/big_265023.jpg",
+      title: "Напитки",
+      id: "drink",
+    },
+    {
+      img: "https://kuhnea.files.wordpress.com/2015/02/psennaia.jpg",
+      title: "Детские",
+      id: "kids",
+    },
   ];
 
   const navigate = useNavigate();
@@ -34,7 +44,11 @@ export const Categories = () => {
               className="flex flex-col items-center"
               key={idx}
             >
-              <img src={el.img} alt="categories" />
+              <img
+                src={el.img}
+                alt="categories"
+                className="w-[190px] h-[190px] object-cover rounded-[50%]"
+              />
               <h3 className="text-[28px] text-center mt-[15px]">{el.title}</h3>
             </div>
           ))}
