@@ -151,14 +151,14 @@ export const Header = () => {
                     className=" transition-all w-[100%] rounded-lg h-[30px] border-[1px] border-[#714424] px-[10px]"
                     placeholder="Поиск рецепта"
                   />
-                  <button
+                  {/* <button
                     style={{
                       display: searchBtn ? "" : "none",
                     }}
                     className="ml-[-30px]"
                   >
                     <IoSearch />
-                  </button>
+                  </button> */}
                 </div>
                 <button
                   onClick={() => setSearchBtn(!searchBtn)}
