@@ -5,7 +5,9 @@ import { Card } from "./Card";
 export const Search = () => {
   const { recipes, search } = useSelector((s) => s);
 
-  const searchValue = recipes.filter((el) => el.title.includes(search));
+  const searchValue = recipes.filter((el) =>
+    el.title.toLowerCase().includes(search.toLowerCase())
+  );
   console.log(searchValue);
 
   return (
