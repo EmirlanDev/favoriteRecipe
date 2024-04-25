@@ -17,10 +17,11 @@ export const MainRoutes = () => {
     { path: "/categories/:id", element: <DetailCategories /> },
     { path: "/categories/:id/:detailId", element: <DetailPage /> },
     { path: "/popular/:detailId", element: <DetailPage /> },
-    { path: "saved/popular/:detailId", element: <DetailPage /> },
+    { path: "/saved/popular/:detailId", element: <DetailPage /> },
     { path: "/saved", element: <Saved /> },
     { path: "/add_new_recipe", element: <AddNew /> },
     { path: "/search", element: <Search /> },
+    { path: "/search/popular/:detailId", element: <DetailPage /> },
   ];
 
   return (
