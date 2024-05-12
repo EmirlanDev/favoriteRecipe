@@ -27,6 +27,16 @@ export const RecipeContext = ({ children }) => {
     getRecipes();
   }
 
+  async function getOneRecipe(id) {
+    let { data } = await axios(`${API}/${id}`);
+    dispatch({ type: actionType.ONE_RECIPE, payload: data });
+  }
+
+  async function editRecipe(id, values) {
+    await axios.put(`${API}/${id}`, values);
+    getRecipes();
+  }
+
   async function addLike(id) {
     let { data } = await axios(`${API}/${id}`);
     let check = data.like.some((email) => email === user.email);
@@ -48,6 +58,8 @@ export const RecipeContext = ({ children }) => {
     getRecipes,
     delRecipe,
     addLike,
+    getOneRecipe,
+    editRecipe,
   };
   return (
     <recipeContext.Provider value={values}>{children}</recipeContext.Provider>

@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import saveImg from "../assets/save.svg";
 import saveWhite from "../assets/saveWhite.svg";
-import { MdDelete } from "react-icons/md";
+import { MdDelete, MdEdit } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { addToSave } from "./../redux/Reducer/ActionCreater";
 import { useRecipeContext } from "./../context/RecipeContext";
@@ -72,8 +72,7 @@ export const Card = ({ el, id, detailId }) => {
             ...
           </span>
         </h2>
-        <MdDelete
-          onClick={() => delRecipe(el.id)}
+        <div
           style={{
             display:
               (user && user.displayName === el.user.name) ||
@@ -81,8 +80,17 @@ export const Card = ({ el, id, detailId }) => {
                 ? ""
                 : "none",
           }}
-          className="absolute right-8 bottom-5 text-[30px] text-[red]"
-        />
+          className="absolute right-8 bottom-5 flex gap-3"
+        >
+          <MdEdit
+            onClick={() => navigate(`/edit/${el.id}`)}
+            className="text-[30px] text-[#155c15]"
+          />
+          <MdDelete
+            onClick={() => delRecipe(el.id)}
+            className="text-[30px] text-[red]"
+          />
+        </div>
       </div>
     </div>
   );

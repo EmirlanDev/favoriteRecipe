@@ -36,6 +36,12 @@ export const ImagesByURL = ({ setValues, values }) => {
     setValues({ ...values, image: collec });
   }, [collec]);
 
+  useEffect(() => {
+    if (values.image.length > 0) {
+      setCollec(values.image);
+    }
+  }, [values.image]);
+
   const deleteImage = (idx) => {
     if (window.confirm("Удалить")) {
       setCollec(collec.filter((el, ind) => ind !== idx));

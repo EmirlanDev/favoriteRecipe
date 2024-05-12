@@ -6,12 +6,21 @@ import { Instructions } from "./Instructions";
 import { useRecipeContext } from "./../../context/RecipeContext";
 import { useSelector } from "react-redux";
 import { ImagesByURL } from "./ImagesByURL";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 export const AddNew = () => {
-  const { user } = useSelector((s) => s);
+  const { user, oneRecipe } = useSelector((s) => s);
   const navigate = useNavigate();
   const [error, setError] = useState("");
+  const { id } = useParams();
+  const { createNewRecipe, getOneRecipe, editRecipe } = useRecipeContext();
+
+  useEffect(() => {
+    if (id) {
+      getOneRecipe(id);
+      setValues(oneRecipe);
+    }
+  }, []);
 
   const [values, setValues] = useState({
     user: {
@@ -57,8 +66,6 @@ export const AddNew = () => {
     { title: "Напитки", id: "drink" },
     { title: "Детские", id: "kids" },
   ];
-
-  const { createNewRecipe } = useRecipeContext();
 
   function handleCreate() {
     try {
@@ -106,6 +113,46 @@ export const AddNew = () => {
         setError("Заполните поля!!!");
         return;
       }
+    } catch (error) {
+      setError("Заполните поля!!!");
+    }
+  }
+
+  function handleEditRecipe() {
+    try {
+      editRecipe(id, values);
+      setValues({
+        user: {
+          name: "",
+          image: "",
+        },
+        title: "",
+        image: [],
+        nutrition: {
+          calories: "",
+          carbohydrate: "",
+          protein: "",
+          sodium: "",
+          cleanCarbohydrate: "",
+          grease: "",
+        },
+        desciption: "",
+        ingredients: [],
+        instructions: [],
+        serving: 0,
+        cookingTime: {
+          hour: 0,
+          minut: 0,
+        },
+        preparationTime: {
+          hour: 0,
+          minut: 0,
+        },
+        category: "",
+        like: [],
+      });
+      navigate("/");
+      window.scroll(0, 0);
     } catch (error) {
       setError("Заполните поля!!!");
     }
@@ -275,12 +322,21 @@ export const AddNew = () => {
             </select>
             <div className="py-[60px] flex justify-end flex-col items-end">
               <p className="mb-4 text-red-600 text-[20px]">{error}</p>
-              <button
-                onClick={handleCreate}
-                className="py-[10px] px-[54px] text-[25px] bg-[#714424] rounded-xl text-cente text-white"
-              >
-                Создать
-              </button>
+              {oneRecipe ? (
+                <button
+                  onClick={handleEditRecipe}
+                  className="py-[10px] px-[54px] text-[25px] bg-[#714424] rounded-xl text-cente text-white"
+                >
+                  Сохранить
+                </button>
+              ) : (
+                <button
+                  onClick={handleCreate}
+                  className="py-[10px] px-[54px] text-[25px] bg-[#714424] rounded-xl text-cente text-white"
+                >
+                  Создать
+                </button>
+              )}
             </div>
           </div>
         </div>

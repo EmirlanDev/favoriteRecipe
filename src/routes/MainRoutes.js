@@ -20,6 +20,7 @@ export const MainRoutes = () => {
     { path: "/saved/popular/:detailId", element: <DetailPage /> },
     { path: "/saved", element: <Saved /> },
     { path: "/add_new_recipe", element: <AddNew /> },
+    { path: "/edit/:id", element: <AddNew /> },
     { path: "/search", element: <Search /> },
     { path: "/search/popular/:detailId", element: <DetailPage /> },
   ];
