@@ -189,7 +189,7 @@ export const AddNew = () => {
               className="border-[2px] border-[#757575] rounded-[8px] text-[22px] py-[8px] px-[20px] w-[100%] gap-[8px]"
               type="text"
               placeholder="Добавить название"
-              value={values.title}
+              value={values ? values.title : ""}
             />
             <ImagesByURL setValues={setValues} values={values} />
             <Nutrition setValues={setValues} values={values} />
@@ -203,7 +203,7 @@ export const AddNew = () => {
               className="border-[2px] border-[#757575] rounded-[8px] text-[22px] py-[8px] px-[20px] w-[100%] gap-[8px] max-h-[200px]"
               type="text"
               placeholder="Представь свой рецепт"
-              value={values.desciption}
+              value={values ? values.desciption : ""}
             ></textarea>
             <Ingredients setValues={setValues} values={values} />
             <Instructions setValues={setValues} values={values} />
@@ -217,7 +217,7 @@ export const AddNew = () => {
               className="border-[2px] border-[#757575] rounded-[8px] text-[22px] py-[8px] px-[20px] w-[100%] gap-[8px]"
               type="number"
               placeholder="#"
-              value={values.serving === 0 ? "" : values.serving}
+              value={values ? (values.serving === 0 ? "" : values.serving) : ""}
             />
             <h2 className="text-[30px] text-[#FF9A31] font-semibold max-[540px]:text-[28px] mt-[50px] mb-[20px]">
               Время приготовления:
@@ -237,7 +237,11 @@ export const AddNew = () => {
                 type="number"
                 placeholder="Час 0"
                 value={
-                  values.cookingTime.hour === 0 ? "" : values.cookingTime.hour
+                  values
+                    ? values.cookingTime.hour === 0
+                      ? ""
+                      : values.cookingTime.hour
+                    : ""
                 }
               />
               <input
@@ -254,7 +258,11 @@ export const AddNew = () => {
                 type="number"
                 placeholder="Минут 0"
                 value={
-                  values.cookingTime.minut === 0 ? "" : values.cookingTime.minut
+                  values
+                    ? values.cookingTime.minut === 0
+                      ? ""
+                      : values.cookingTime.minut
+                    : ""
                 }
               />
             </div>
@@ -277,9 +285,11 @@ export const AddNew = () => {
                 type="number"
                 placeholder="Час 0"
                 value={
-                  values.preparationTime.hour === 0
-                    ? ""
-                    : values.preparationTime.hour
+                  values
+                    ? values.preparationTime.hour === 0
+                      ? ""
+                      : values.preparationTime.hour
+                    : ""
                 }
               />
               <input
@@ -296,9 +306,11 @@ export const AddNew = () => {
                 type="number"
                 placeholder="Минут 0"
                 value={
-                  values.preparationTime.minut === 0
-                    ? ""
-                    : values.preparationTime.minut
+                  values
+                    ? values.preparationTime.minut === 0
+                      ? ""
+                      : values.preparationTime.minut
+                    : ""
                 }
               />
             </div>
@@ -310,7 +322,7 @@ export const AddNew = () => {
               onChange={(e) =>
                 setValues({ ...values, category: e.target.value })
               }
-              value={values.category}
+              value={values ? values.category : ""}
               className="border-[2px] border-[#757575] rounded-[8px] text-[22px] py-[8px] px-[20px] w-[100%] gap-[8px flex items-center py-[40px]"
             >
               <option value="">Добавить котегории</option>

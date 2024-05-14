@@ -38,7 +38,7 @@ export const ImagesByURL = ({ setValues, values }) => {
 
   useEffect(() => {
     if (values.image.length > 0) {
-      setCollec(values.image);
+      setCollec(values ? values.image : []);
     }
   }, [values.image]);
 

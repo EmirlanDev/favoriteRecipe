@@ -57,16 +57,16 @@ export const DetailPage = () => {
       {oneRecipe ? (
         <div className="container">
           <h1 className="text-[32px] py-[30px]">{oneRecipe.title}</h1>
-          <div className="flex gap-5 justify-between w-[100%] max-[890px]:flex-col">
+          <div className="flex gap-1 justify-between w-[100%] max-[890px]:flex-col">
             <div className="max-w-[824px] w-[100%]">
               <img
-                className="w-[799px] h-[528px] rounded-[20px] max-[1025px]:h-[400px] max-[700px]:h-[350px] "
+                className="w-[799px] h-[460px] rounded-[20px] max-[1025px]:h-[400px] max-[700px]:h-[200px] "
                 src={oneRecipe.image ? oneRecipe.image[imgIdx] : ""}
                 alt=""
               />
               <div
                 id="img"
-                className="flex gap-[30px] max-w-[800px] h-[230px] min-h-[166px] items-center overflow-x-scroll max-[540px]:gap-[15px]"
+                className="flex gap-[30px] max-w-[800px] h-[180px] min-h-[166px] items-center overflow-x-scroll max-[540px]:gap-[15px]"
               >
                 {oneRecipe.image.map((img, idx) => (
                   <div key={idx} className="relative">
@@ -79,13 +79,13 @@ export const DetailPage = () => {
                     ></div>
                     <img
                       style={{
-                        height: imgIdx === idx ? "166px" : "",
-                        width: imgIdx === idx ? "148px" : "146px",
+                        height: imgIdx === idx ? "136px" : "",
+                        width: imgIdx === idx ? "128px" : "126px",
                         border: imgIdx === idx ? "2px solid #FF9A31" : "",
                         boxShadow:
                           imgIdx === idx ? "0px 0px 17px 2px #00000087" : "",
                       }}
-                      className="min-w-[132px] h-[160px] rounded-[8px]"
+                      className="min-w-[120px] h-[130px] rounded-[8px]"
                       src={img}
                       alt="products"
                     />
