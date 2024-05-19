@@ -26,17 +26,17 @@ export const Search = () => {
               ))
             ) : (
               <div className="load">
-                <h3 className="text-[30px] max-[470px]:text-[18px] text-center">
-                  Нету по вашему запросу <br />
+                <h3 className="text-[24px] max-[470px]:text-[18px] text-center">
+                  К сожалению ,по Вашему запросу ничего не найдено …
+                  <br />
                   <span className="flex gap-1">
-                    Можете
                     <span
                       onClick={() => navigate("/add_new_recipe")}
                       className="text-[#2669c8] underline"
                     >
-                      добавить
+                      Добавьте
                     </span>
-                    свой рецепт
+                    свой рецепт и развивайтесь вместе с нами!
                   </span>
                 </h3>
               </div>
