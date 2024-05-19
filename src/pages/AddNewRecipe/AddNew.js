@@ -65,6 +65,7 @@ export const AddNew = () => {
     { title: "Пасты", id: "pasta" },
     { title: "Напитки", id: "drink" },
     { title: "Детские", id: "kids" },
+    { title: "Этно", id: "etno" },
   ];
 
   function handleCreate() {
@@ -158,19 +159,19 @@ export const AddNew = () => {
     }
   }
 
-  useEffect(() => {
-    if (!JSON.parse(localStorage.getItem("open"))) {
-      navigate("/");
-    }
-  }, [JSON.parse(localStorage.getItem("open"))]);
+  // useEffect(() => {
+  //   if (!JSON.parse(localStorage.getItem("open"))) {
+  //     navigate("/");
+  //   }
+  // }, [JSON.parse(localStorage.getItem("open"))]);
 
   return (
     <section className="pt-[100px] max-[720px]:pt-[80px]">
       <div className="container">
         <div>
           <h1 className="text-[32px] py-[30px] border-b-[2px] flex justify-between items-center">
-            Создать рецепт{" "}
-            <span
+            Создать рецепт
+            {/*<span
               onClick={() => {
                 localStorage.removeItem("open");
                 navigate("/");
@@ -178,7 +179,7 @@ export const AddNew = () => {
               className="text-[14px] py-[3px] px-[8px] bg-[#9b1414] text-white rounded-md cursor-pointer"
             >
               Закрыть доступ
-            </span>
+            </span> */}
           </h1>
           <div className="mx-[auto] max-w-[590px] w-[100%]">
             <h2 className="text-[30px] text-[#FF9A31] font-semibold max-[540px]:text-[28px] mt-[50px] mb-[20px]">

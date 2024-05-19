@@ -39,6 +39,8 @@ export const DetailCategories = () => {
       setCategor("Напитки");
     } else if (id == "kids") {
       setCategor("Детские");
+    } else if (id == "etno") {
+      setCategor("Этно");
     }
   }, []);
 
@@ -73,21 +75,6 @@ export const DetailCategories = () => {
     <section className="pt-[100px] max-[720px]:pt-[80px]">
       <div className="container">
         <div>
-          {/* <div className="flex justify-center py-[30px] gap-[10px]">
-            <input
-              onChange={(e) => setSearch(e.target.value)}
-              onKeyDown={onKeyEnter}
-              className="border-[2px] border-[#714424] py-[5px] px-[20px] rounded-[8px] w-[60%] text-[18px] max-[780px]:w-[80%]"
-              type="text"
-              placeholder="Поиск..."
-            />
-            <button
-              onClick={getSearchRes}
-              className="w-[38px] h-[38px] rounded-[8px] bg-[#714424] flex justify-center items-center"
-            >
-              <IoSearch className="text-[22px] text-[#fff]" />
-            </button>
-          </div> */}
           <h1 className="text-4xl my-6">{categor}</h1>
         </div>
         <div className="popular">

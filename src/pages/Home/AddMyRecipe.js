@@ -5,47 +5,46 @@ import { useNavigate } from "react-router-dom";
 export const AddMyRecipe = () => {
   const navigate = useNavigate();
 
-  const [modal, setModal] = useState(false);
-  const [confirmation, setConfirmation] = useState("");
-  const [error, setError] = useState("");
+  // const [modal, setModal] = useState(false);
+  // const [confirmation, setConfirmation] = useState("");
+  // const [error, setError] = useState("");
 
-  function saveConfirmation() {
-    if (confirmation === "040601") {
-      localStorage.setItem("open", JSON.stringify(confirmation));
-      navigate("/add_new_recipe");
-      setConfirmation("");
-      setModal(false);
-    } else if (confirmation.length > 6) {
-      setError("Больше 6 значений");
-      setConfirmation("");
-    } else {
-      setError("Неправильный код");
-      setConfirmation("");
-    }
-  }
+  // function saveConfirmation() {
+  //   if (confirmation === "040601") {
+  //     localStorage.setItem("open", JSON.stringify(confirmation));
+  //     navigate("/add_new_recipe");
+  //     setConfirmation("");
+  //     setModal(false);
+  //   } else if (confirmation.length > 6) {
+  //     setError("Больше 6 значений");
+  //     setConfirmation("");
+  //   } else {
+  //     setError("Неправильный код");
+  //     setConfirmation("");
+  //   }
+  // }
 
-  function onKeyEnterConfirmation(e) {
-    if (e.key === "Enter") {
-      saveConfirmation();
-    }
-  }
+  // function onKeyEnterConfirmation(e) {
+  //   if (e.key === "Enter") {
+  //     saveConfirmation();
+  //   }
+  // }
 
-  function navAdd() {
-    if (JSON.parse(localStorage.getItem("open"))) {
-      navigate("/add_new_recipe");
-      setTimeout(() => {
-        window.scroll(0, 0);
-      }, 100);
-    } else {
-      setModal(true);
-    }
-  }
+  // function navAdd() {
+  //   if (JSON.parse(localStorage.getItem("open"))) {
+  //     setTimeout(() => {
+  //       window.scroll(0, 0);
+  //     }, 100);
+  //   } else {
+  //     setModal(true);
+  //   }
+  // }
 
-  useEffect(() => {
-    setTimeout(() => {
-      setError("");
-    }, 4000);
-  }, [error]);
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     setError("");
+  //   }, 4000);
+  // }, [error]);
 
   return (
     <section className="mt-[260px] pb-[40px] max-[720px]:mt-[100px] ">
@@ -68,7 +67,9 @@ export const AddMyRecipe = () => {
               Поделись с своими самыми крутыми рецептами и получи отзыв
             </h6>
             <button
-              onClick={navAdd}
+              onClick={() => {
+                navigate("/add_new_recipe");
+              }}
               className="text-[20px] h-[40px] bg-[#714424] px-[16px] text-[#fff] flex items-center rounded-[10px]"
             >
               Создать новый рецепт
@@ -76,7 +77,7 @@ export const AddMyRecipe = () => {
           </div>
         </div>
       </div>
-      <div
+      {/* <div
         style={{
           display: modal ? "" : "none",
         }}
@@ -121,7 +122,7 @@ export const AddMyRecipe = () => {
             </button>
           </div>
         </div>
-      </div>
+      </div> */}
     </section>
   );
 };

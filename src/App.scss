@@ -22,7 +22,7 @@ input {
 
 .categories {
   display: grid;
-  grid-template-columns: repeat(5, 220px);
+  grid-template-columns: repeat(6, 150px);
   justify-content: space-between;
   row-gap: 60px;
   flex-wrap: wrap;
@@ -125,22 +125,6 @@ input {
   text-align: center;
   margin-top: 5px;
 }
-
-// #search {
-//   input {
-//     width: 0;
-//     padding: 0;
-//     border: none;
-//     transition: 0.5s;
-//   }
-//   &:hover {
-//     input {
-//       width: 180px;
-//       padding: 0 10px;
-//       border: 1px solid #714424;
-//     }
-//   }
-// }
 
 .load {
   width: 100vw;

@@ -7,6 +7,7 @@ import salat from "../../assets/salat.png";
 import pizza from "../../assets/pizza.png";
 import smoothy from "../../assets/smoothy.png";
 import pasta from "../../assets/pasta.png";
+import etno from "../../assets/etno.png";
 import { useNavigate } from "react-router-dom";
 
 export const Categories = () => {
@@ -29,6 +30,7 @@ export const Categories = () => {
       title: "Детские",
       id: "kids",
     },
+    { img: etno, title: "Этно", id: "etno" },
   ];
 
   const navigate = useNavigate();
@@ -47,9 +49,11 @@ export const Categories = () => {
               <img
                 src={el.img}
                 alt="categories"
-                className="w-[190px] h-[190px] object-cover rounded-[50%]"
+                className="w-[150px] h-[150px] object-cover rounded-[50%] max-[600px]:w-[190px] max-[600px]:h-[190px]"
               />
-              <h3 className="text-[28px] text-center mt-[15px]">{el.title}</h3>
+              <h3 className="text-[25px] text-center mt-[15px] max-[600px]:text-[28px] font-semibold">
+                {el.title}
+              </h3>
             </div>
           ))}
         </div>
