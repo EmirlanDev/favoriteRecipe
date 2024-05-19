@@ -53,6 +53,18 @@ export const RecipeContext = ({ children }) => {
     console.log(data);
   }
 
+  async function addComment(id, message) {
+    let { data } = await axios(`${API}/${id}`);
+    data.comment.push({
+      user: {
+        image: user.photoURL,
+        name: user.displayName,
+      },
+      message: message,
+    });
+    await axios.put(`${API}/${id}`, data);
+  }
+
   const values = {
     createNewRecipe,
     getRecipes,
@@ -60,6 +72,7 @@ export const RecipeContext = ({ children }) => {
     addLike,
     getOneRecipe,
     editRecipe,
+    addComment,
   };
   return (
     <recipeContext.Provider value={values}>{children}</recipeContext.Provider>

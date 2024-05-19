@@ -52,6 +52,7 @@ export const AddNew = () => {
     },
     category: "",
     like: [],
+    comment: [],
   });
 
   const categories = [
@@ -151,6 +152,7 @@ export const AddNew = () => {
         },
         category: "",
         like: [],
+        comment: [],
       });
       navigate("/");
       window.scroll(0, 0);

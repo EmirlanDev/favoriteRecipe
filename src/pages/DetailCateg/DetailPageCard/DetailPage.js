@@ -5,21 +5,29 @@ import { OhterRecipes } from "./OhterRecipes";
 import { useSelector } from "react-redux";
 import { useRecipeContext } from "./../../../context/RecipeContext";
 import { FaCheck } from "react-icons/fa6";
+import axios from "axios";
 
 export const DetailPage = () => {
   const { id, detailId } = useParams();
   const [oneRecipe, setOneRecipe] = useState(null);
   const [similar, setSimirlar] = useState([]);
   const { recipes } = useSelector((s) => s);
-  const { getRecipes } = useRecipeContext();
+  const { getRecipes, addComment } = useRecipeContext();
   const [isDone, setIsDone] = useState(
     JSON.parse(localStorage.getItem("isDone")) || []
   );
   const [imgIdx, setImgIdx] = useState(0);
+  const [comMess, setComMess] = useState("");
 
-  function foundOneRecipe() {
-    let oneRecipe = recipes.find((el) => el.id === detailId);
-    setOneRecipe(oneRecipe);
+  async function foundOneRecipe() {
+    try {
+      let { data } = await axios(
+        `https://660db7bb6ddfa2943b3516f4.mockapi.io/food/recipe/${detailId}`
+      );
+      setOneRecipe(data);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   function similarRecipeForCategory() {
@@ -46,11 +54,24 @@ export const DetailPage = () => {
   useEffect(() => {
     foundOneRecipe();
     similarRecipeForCategory();
-  }, [recipes]);
+  }, [oneRecipe]);
 
   useEffect(() => {
     getRecipes();
   }, []);
+
+  function handleCommit() {
+    try {
+      if (comMess) {
+        addComment(oneRecipe.id, comMess);
+        setComMess("");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  console.log(oneRecipe);
 
   return (
     <section className="pt-[100px]">
@@ -156,7 +177,7 @@ export const DetailPage = () => {
                   </div>
                 ))}
               </div>
-              <div className="flex flex-col gap-4 pb-[80px] max-[890px]:pb-[20px]">
+              <div className="flex flex-col gap-4 pb-[40px] max-[890px]:pb-[20px]">
                 <h2 className="text-[36px] text-[#FF9A31] font-semibold max-[540px]:text-[30px]">
                   Инструкция:
                 </h2>
@@ -174,7 +195,7 @@ export const DetailPage = () => {
               </div>
             </div>
             <div>
-              <div className="bg-[#D9D9D98F] rounded-[10px] pt-[30px] pb-[60px] px-[30px] mb-5">
+              <div className="bg-[#D9D9D98F] rounded-[10px] pt-[30px] pb-[20px] px-[30px] mb-5">
                 <h2 className="text-[26px] text-center text-[#FF9A31] mb-[25px] max-[1025px]:leading-7">
                   Информация о питательности продукта
                 </h2>
@@ -257,6 +278,44 @@ export const DetailPage = () => {
                 </div>
               </div> */}
             </div>
+          </div>
+          <div className="mb-[25px]">
+            <h2 className="text-[24px] mb-[14px]">Комментарии</h2>
+            <div className="w-[80%] max-[600px]:w-[100%] flex flex-col items-end">
+              <textarea
+                onChange={(e) => setComMess(e.target.value)}
+                value={comMess}
+                className="border-[#8F8F8F] border-[2px] rounded-[10px] h-[80px] w-[100%] px-[20px] py-[8px] outline-none"
+                placeholder="Добавить комментарий"
+              ></textarea>
+              <button
+                onClick={handleCommit}
+                className="bg-[#02B4F9] text-[#fff] rounded-[10px] py-[3px] px-[15px] my-[10px]"
+              >
+                Отправить
+              </button>
+            </div>
+          </div>
+          <div>
+            {oneRecipe.comment
+              ? oneRecipe.comment.map((el, idx) => (
+                  <div key={idx} className="border-t-[2px] pt-[10px]">
+                    <div className="flex items-center gap-4">
+                      <img
+                        className="w-[50px] h-[50px] rounded-[50%]"
+                        src={el.user.image}
+                        alt="avatar"
+                      />
+                      <h3 className="text-[22px] font-semibold">
+                        {el.user.name}
+                      </h3>
+                    </div>
+                    <h2 className="pl-[70px] text-[22px] pt-[10px] pb-[40px]">
+                      {el.message}
+                    </h2>
+                  </div>
+                ))
+              : null}
           </div>
         </div>
       ) : (
