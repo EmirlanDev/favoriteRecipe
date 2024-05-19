@@ -319,7 +319,9 @@ export const DetailPage = () => {
           </div>
         </div>
       ) : (
-        <h1>...loading</h1>
+        <div className="h-[80vh] flex items-center justify-center">
+          <div class="loader"></div>
+        </div>
       )}
     </section>
   );
