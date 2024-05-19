@@ -87,7 +87,7 @@ export const LogIn = () => {
             className={`border-[1px] mt-3 border-[#FF9A31] rounded-[8px] px-[20px] py-[4px] text-[17px] max-w-[300px] w-[100%] ${
               values.email || valid.email ? "" : "placeholder:text-red-500"
             }`}
-            type="text"
+            type="email"
             placeholder={
               values.email || valid.email ? "Email" : "Заполните Email!"
             }
